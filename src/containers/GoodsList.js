@@ -1,15 +1,13 @@
 import { Goods } from '../components/Goods/Goods'
 
 function GoodsList(props) {
-    const { goods = [] } = props;
+    const { goods = []} = props;
 
     if (!goods.length) {
         return <h3>Ничего нет</h3>
     }
 
     return (
-
-
         <section className="new-arrival">
             <div className="arrival-heading">
                 <strong>New Arrival</strong>

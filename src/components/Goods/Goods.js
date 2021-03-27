@@ -1,3 +1,5 @@
+import React, {useContext} from 'react'
+import {Context} from '../../Context'
 import './Goods.css'
 
 function Goods(props) {
@@ -7,12 +9,13 @@ function Goods(props) {
         displayAssets,
         displayName,
         displayDescription,
-    } = props;
+    } = props;  
 
+    const context = useContext(Context);
 
     return (
         <>
-            <div className="card card-shadow" id={mainId}>
+            <div className="card card-shadow">
                 <div className="card-image">
                     <img src={displayAssets[0].url} alt={displayName} />
                     <span className="cards-title">{displayName}</span>
@@ -21,7 +24,10 @@ function Goods(props) {
                     <p>{displayDescription}</p>
                 </div>
                 <div className="card-action">
-                    <button className='btn'>Купить</button>
+                    <button className='btn' onClick={()=> context.addToCart({
+                        mainId,
+                        displayName,
+                    })}>Купить</button>
                     <span className='rigth'> Цена {price.finalPrice} грн</span>
                 </div>
             </div>
