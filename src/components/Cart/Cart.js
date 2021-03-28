@@ -9,14 +9,16 @@ function Cart(props) {
     const image = props.image;
     const mainId = props.mainId;
     const context = useContext(Context);
-
+  
     return (
         <>
             <div className="cart-item">
                 <img src={image} alt={name} className='cart-img' />
                 <div className='cart-name'>{name}</div>
                 <div className='cart-col'>
+                    <span className='cart-minus' onClick={()=> context.minusGoods({mainId})}>-</span>
                     <span className='cart-input'>{countGoods}</span>
+                    <span className='cart-add' onClick={()=> context.addGoods({mainId})}>+</span>
                     <span className='cart-x'>X</span>
                     <span className='cart-price'>  {+countGoods * +price} грн.</span>
                 </div>

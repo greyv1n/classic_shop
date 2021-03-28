@@ -1,35 +1,74 @@
+.wrap {
+  position: relative;
+}
+
+.cart-container {
+  position: absolute;
+  top: 25px;
+  right: -35px;
+}
+
 
 .cart {
-    position: fixed;
-    bottom: 30px;
-    right: 100px;
-  
-    cursor: pointer;
-    z-index: 5;
-    padding: 10px;
-    background: #d3a3a4;
-    border-radius: 10px;
-    transition: transform .2s linear;
-  
+  position: fixed;
+  cursor: pointer;
+  z-index: 5;
+  padding: 10px;
+  background: #d3a3a4;
+  border-radius: 10px;
+  transition: transform .2s linear;
   }
   
   .cart:hover{
     transform: scale(1.2);
   }
 
-  @media (min-width: 767px) {
-    .cart {
-      top: 12px;
-      bottom: unset;
-      color: #fff;
-      right: 20px;
 
+
+  /* Cart Items */
+  .cart-hide {
+    display: none;
+  }
+
+  .cart-wrap {
+    display: block;
+    position: fixed;
+    z-index: 1000;
+    width: 500px;
+    max-width: 90%;
+    margin: 0 auto;
+    background: white;
+    border-radius: 5px;
+
+    top:40%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    box-shadow:0 1px 5px 0 rgb(0 0 0 / 20%);
+    padding: 10px;
+
+    animation: show 500ms ease-in-out;
+  }
+
+  @keyframes show {
+    from {
+      top: 60%;
+      opacity: 0;
+    } 
+    to {
+      top: 40%;
+      opacity: 1;
     }
   }
 
-  /* Cart Items */
+  .cart-close {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
   .cart-goods {
-    margin: 20px auto;
+    margin-top: 20px;
     border: 1px solid rgb(182, 182, 185);
     background: #fff;
     padding: 10px;
@@ -46,6 +85,10 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .cart-item:hover {
+    background: cyan;
   }
 
   .cart-img {
@@ -82,7 +125,18 @@
     margin: 0 10px;
     color: #727272;
   }
+
+  .cart-minus, .cart-add {
+    margin: 5px;
+    cursor: pointer;
+    font-size: 20px;
+  }
   
+  .cart-total-price {
+    font-weight: 700;
+  }
+  
+
   .cart-price {
     font-size: 20px;
     font-weight: 500;
@@ -103,4 +157,23 @@
   }
   .add-cart {
     margin: 20px;
+  }
+
+  @media (max-width: 992px) {
+    .cart-container {
+      right: 20px;
+    }
+  }
+
+  @media (min-width: 767px) {
+    .cart {
+      bottom: unset;
+      color: #fff;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cart-container {
+      right: 50px;
+    }
   }

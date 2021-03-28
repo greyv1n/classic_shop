@@ -11,13 +11,38 @@ function Shop() {
   const [isReady, setIsReady] = useState(false);
   const [cart, setCart] = useState({});
   const [count, setCount] = useState(0);
+  const [cartShow, setCartShow] = useState(false);
 
   const data = {
     addToCart,
     deleteToCart,
+    handleCartShow,
+    addGoods,
+    minusGoods,
+    cartShow,
     goods,
     count,
     cart
+  }
+
+  function addGoods(item) {
+    let id = item.mainId;
+    setCart({ ...cart, [id]: cart[id] + 1, })
+    setCount(count + 1);
+  }
+
+  function minusGoods(item) {
+    let id = item.mainId;
+    if (cart[id] > 1) {
+      setCart({ ...cart, [id]: cart[id] - 1, })
+      setCount(count - 1);
+    } else {
+      deleteToCart(item);
+    }
+  }
+
+  function handleCartShow() {
+    setCartShow(!cartShow);
   }
 
   function addToCart(item) {
@@ -33,7 +58,14 @@ function Shop() {
 
   function deleteToCart(item) {
     const id = item.mainId;
-    
+    if (count > 0) {
+      let newCart = {}
+      let countItem;
+
+      Object.keys(cart).map(key => key !== id ? newCart[key] = cart[key] : countItem = cart[key]);
+      setCart(newCart);
+      setCount(count - countItem);
+    }
   }
 
 
@@ -51,18 +83,10 @@ function Shop() {
       });
   }, []);
 
-
-  function handlerClick(event) {
-    // console.log(event.target)
-
-  }
-
-
-
   return (
     <Context.Provider value={data}>
       <div className="container content">
-        <div onClick={handlerClick}> <CartList /></div>
+        <div> <CartList /></div>
         <div>{!isReady ? <Preloader /> : <GoodsList goods={goods} />}</div>
       </div>
     </Context.Provider>
